@@ -1,1 +1,2 @@
 # ping-pong
+There is a Ping Pong game in the repository. This is a multiplayer game. The game is written in Python using the PyGame library. There are two players in the game, the player number 1 controls the racket using the W and S keys. Player number two uses the Up and Down keys. The goal of the game is to hit the ball into the wall behind the racket before the opponent does. After the ball hits the wall behind the racket, the game ends automatically.
