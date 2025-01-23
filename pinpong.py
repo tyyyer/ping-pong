@@ -37,9 +37,9 @@ class Player(GameSprite):
             self.rect.y += self.speed
             
 
-rocket1 = Player('rockk.png', 100, 120, 10, 200, 8)
-rocket2 = Player('rockk.png', 100, 120, 600, 200, 8)
-ball = GameSprite('ball.png', 100, 100, 280, 200, 8)
+rocket1 = Player('racket.png', 25, 100, 10, 200, 8)
+rocket2 = Player('racket.png', 25, 100, 600, 200, 8)
+ball = GameSprite('ball.png', 100, 100, 280, 50, 8)
 
 win = 0 
 lost = 0
@@ -48,25 +48,56 @@ font.init()
 font1 = font.SysFont('Arial', 36)
 font2 = font.SysFont('Arial', 60)
 
+lose1 = font1.render('PLAYER 1 LOSE!', True, (0, 0, 0))
+lose2 = font1.render('PLAYER 2 LOSE!', True, (0, 0, 0))
+
 run = True
 finish = False
+
+speed_x = 5
+speed_y = 5
+
+lvl1 = 0
+lvl2 = 0
 
 while run:
     for i in event.get():
         if i.type == QUIT:
             run = False
-        
-    window.blit(background, (0, 0))
+    if finish != True:
 
-    rocket1.bl1t()
-    rocket1.update1()
-    rocket2.bl1t()
-    rocket2.update2()
-    ball.bl1t()
+        window.blit(background, (0, 0))
+
+        ball.rect.x += speed_x   
+        ball.rect.y += speed_y  
+
+        if sprite.collide_rect(ball, rocket1) or sprite.collide_rect(ball, rocket2):
+            speed_x *= -1
+        
+        if ball.rect.y >= 430:
+            speed_y *= -1
+        if ball.rect.y <= -30:
+            speed_y *= -1
+        
+        
+        if ball.rect.x <= -35:
+            finish = True
+            window.blit(lose1, (220, 200))
+
+        if ball.rect.x >= 630:
+            finish = True
+            window.blit(lose2, (220, 200))
+
+        rocket1.bl1t()
+        rocket1.update1()
+        rocket2.bl1t()
+        rocket2.update2()
+        ball.bl1t()
+        
 
     clock.tick(60)
     display.update()
-     
+    
 
 
 
